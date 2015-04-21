@@ -2,7 +2,11 @@
 
 var request = require('request');
 
-request.get('http://github2twitter.herokuapp.com', function (err, response, body) {
+if (!process.env.GITHUB2TWITTER_URL) {
+	throw new Error('No GITHUB2TWITTER_URL configured.');
+}
+
+request.get(process.env.GITHUB2TWITTER_URL, function (err, response, body) {
 	if (err) {
 		console.log(err);
 	} else {
